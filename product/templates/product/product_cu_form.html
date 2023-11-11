@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header_nav %}
+    {% include 'header_nav.html' %}
+{% endblock header_nav %}
+{% block main-content %}
+       <!-- Contact Section Begin -->
+    {% if page == 'new_product' %}
+    <section class="contact spad">
+        <div class="container">
+            {% include 'messages.html' %}
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="contact__content">
+                        <div class="contact__form">
+                            <h5>Add New Product</h5>
+                            <form action="" method="POST">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+{#                                <label for="title">Title: </label>#}
+{#                                {{ form.title }}#}
+{#                                <label for="price">Price: </label>#}
+{#                                {{ form.price }}#}
+{#                                <label for="description">Description: </label>#}
+{#                                {{ form.description }}#}
+{#                                <label for="product_image">Image: </label>#}
+{#                                {{ form.imageURL }}#}
+{#                                <label for="category">Category: </label>#}
+{#                                {{ form.category }}#}
+                                <div class="add-product">
+                                    <button type="submit" class="site-btn-add-product">create</button>
+                                    <a class="new-index no" href="{{ request.META.HTTP_REFERER }}">Back</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</section>
+    {% else %}
+<section class="contact spad">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="contact__content">
+                        <div class="contact__form">
+                            <h5>Update The Product</h5>
+                            <form action="" method="POST">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <div class="add-product">
+                                    <a class="new-index no" href="{{ request.META.HTTP_REFERER }}">Back</a>
+                                    <button type="submit" class="site-btn-add-product">Save</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</section>
+    {% endif %}
+<!-- Contact Section End -->
+{% endblock main-content %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Confirm Delete{% endblock title %}
+
+{% block header_nav %}
+    {% include 'header_nav.html' %}
+{% endblock header_nav %}
+{% block main-content %}
+
+   <!-- Contact Section Begin -->
+    <section class="contact spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="contact__content">
+                        <div class="contact__form">
+                            <h5>Alert Message</h5>
+                            <div >Are you sure you want to delete "{{ product_title }}"?</div>
+                            <div class="side-form">
+                                <form action="{% url 'products:delete' product_id %}" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" value="{{ product_id }}">
+                                    <button type="submit" class="site-btn yes" id="yes-btn">Yes</button>
+                                </form>
+                                <form action="{% url 'products:details' product_id %}" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" value="{{ product_id }}">
+                                    <button type="submit" class="site-btn no">No</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</section>
+<!-- Contact Section End -->
+
+{% endblock main-content %}

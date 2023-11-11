@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Confirm Delete{% endblock title %}
+
+{% block header_nav %}
+    {% include 'header_nav.html' %}
+{% endblock header_nav %}
+{% block main-content %}
+
+   <!-- Contact Section Begin -->
+    <section class="contact spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="contact__content">
+                        <div class="contact__form">
+                            <h5>Alert Message</h5>
+                            <div >Are you sure you want to delete "{{ obj }}"?</div>
+                            <div class="side-form">
+                                <form action="" method="post">
+                                    {% csrf_token %}
+                                    <div class="btn_container">
+                                        <a class="new-index no" href="{{ request.META.HTTP_REFERER }}">Back</a>
+                                        <button type="submit" class="site-btn yes" id="yes-btn">Confirm</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</section>
+<!-- Contact Section End -->
+
+
+{% endblock main-content %}

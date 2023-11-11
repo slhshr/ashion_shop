@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Product details {% endblock %}
+
+{% block header_nav %}
+    {% include 'header_nav.html' %}
+{% endblock header_nav %}
+{% block main-content %}
+        <!-- Product Details Section Begin -->
+    <section class="product-details spad">
+        <div class="container">
+        {% include 'messages.html' %}
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="product__details__pic">
+                        <div class="product__details__slider__content">
+                            <div class="product__details__pic__slider owl-carousel">
+                                {% if product.product_image %}
+                                <img data-hash="product-1" class="product__big__img" src="{{ product.product_image.url }}" alt="">
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="product__details__text">
+                        <h3>{{ product.title }}</h3>
+                        <div class="rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <span>( 138 reviews )</span>
+                        </div>
+                        <div class="product__details__price">$ {{ product.price|floatformat:2 }}</div>
+                        <p>{{ product.description }}</p>
+                        <div class="product__details__button">
+                            <a id="{{ product.id }}" type="submit" class="cart-btn update-cart" data-product="{{ product.id }}" data-action="add"><span class="icon_bag_alt"></span>Add to Cart</a>
+                            <ul>
+                                <li><a href="#"><span class="icon_heart_alt"></span></a></li>
+                                <li><a href="#"><span class="icon_adjust-horiz"></span></a></li>
+                            </ul>
+                        </div>
+                        <div class="bt">
+                            <a id="{{ product.id }}" class="edit" href="{% url 'product:update_product' product.id %}">Edit</a>
+                            <a id="{{ product.id }}" class="delete" href="{% url 'product:delete' product.id %}">Delete</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Details Section End -->
+{% endblock main-content %}

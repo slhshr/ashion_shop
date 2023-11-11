@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Cart{% endblock title %}
+{% block header_nav %}
+    {% include 'header_nav.html' %}
+{% endblock header_nav %}
+{% block main-content %}
+        <!-- Shop Cart Section Begin -->
+    <section class="shop-cart spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="shop__cart__table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            {% for item in items %}
+                            <tbody>
+                                <tr>
+                                    <td class="cart__product__item">
+                                        <img src="{{ item.product.imageURL }}" style="width: 80px" alt="">
+                                        <div class="cart__product__item__title">
+                                            <h6>{{ item.product.title }}</h6>
+                                            <div class="rating">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="cart__price">${{ item.product.price|floatformat:2 }}</td>
+                                    <td class="cart__quantity">
+                                        <div class="pro-qty">
+                                            <input type="text" value="{{ item.quantity }}">
+                                            <span class="dec qtybtn update-cart" data-product="{{item.product.id}}" data-action="remove">-</span>
+                                            <span class="inc qtybtn update-cart" data-product="{{item.product.id}}" data-action="add">+</span>
+                                        </div>
+                                    </td>
+                                    <td class="cart__total">${{ item.total }}</td>
+                                </tr>
+                            </tbody>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="cart__btn">
+                        <a href="{% url 'index' %}">&#x2190; Continue Shopping</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="discount__content">
+                        <h6>Discount codes</h6>
+                        <form action="#">
+                            <input type="text" placeholder="Enter your coupon code">
+                            <button type="submit" class="site-btn">Apply</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-4 offset-lg-2">
+                    <div class="cart__total__procced">
+                        <h6>Cart total</h6>
+                        <ul>
+                            <li>Items <span>{{ order.cart_item }}</span></li>
+                            <li>Total <span>${{ order.cart_total|floatformat:2 }}</span></li>
+                        </ul>
+                        <a href="{% url 'product:checkout' %}" class="primary-btn">Proceed to checkout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock main-content %}

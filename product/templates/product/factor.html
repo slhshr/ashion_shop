@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Factor{% endblock title %}
+
+{% block header_nav %}
+    {% include 'header_nav.html' %}
+{% endblock header_nav %}
+{% block main-content %}
+           <!-- Checkout Section Begin -->
+    <section class="checkout spad">
+        <div class="container">
+            {% include 'messages.html' %}
+            <form action="#" class="checkout__form">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="checkout__order">
+                            <h5 style="margin-top: 10px">Factor information:</h5>
+                            <div class="checkout__order__product">
+                                <ul>
+                                    <li>Customer: {{ customer.full_name }}</li>
+                                    <li>Transaction Id: {{ order.transaction_id }} <span>Total Price: ${{ order.cart_total }}</span> </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+    <!-- Checkout Section End -->
+{% endblock main-content %}
+

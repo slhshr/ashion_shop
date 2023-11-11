@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Create New Customer {% endblock title %}
+
+{% block main-content %}
+         <!-- Contact Section Begin -->
+    <section class="contact spad">
+        <div class="container">
+            {% include 'messages.html' %}
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="contact__content">
+                        <div class="contact__form">
+                            <h5>Customer Information</h5>
+                            <form action="" method="post">
+                                {% csrf_token %}
+                               <label for="full_name">Full Name: </label>
+                                {{ form.full_name }}
+                                <label for="phon">Phone Number: </label>
+                                {{ form.phone }}
+
+                                <div class="add-product">
+                                    <button type="submit" class="site-btn-add-product">Save</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section End -->
+
+
+{% endblock main-content %}
