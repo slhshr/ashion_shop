@@ -11,6 +11,20 @@ from .models import *
 # Create your views here.
 
 
+def search(request):
+    q = request.GET.get('q') if request.GET.get('q') != None else ''
+    products = Product.objects.filter(
+            Q(category__name__icontains=q) |
+            Q(title__icontains=q))
+    if products:
+        context = {'products': products}
+        return render(request, 'product/search.html', context)
+    else:
+        messages.warning(request, 'The product was not found!')
+
+    return render(request, 'product/search.html')
+
+
 def shop(request):
     if request.user.is_authenticated:
         user = request.user
