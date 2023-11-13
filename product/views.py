@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.db.models import Q
 import datetime
@@ -38,13 +38,9 @@ def shop(request):
         order = {'cart_item': 0, 'cart_total': 0}
         cartItems = order['cart_item']
 
-    q = request.GET.get('q') if request.GET.get('q') != None else ''
-
-    products = Product.objects.filter(
-        Q(category__name__icontains=q) |
-        Q(title__icontains=q))
+    products = Product.objects.all()
     categories = Category.objects.all()
-    context = {'products': products, 'categories': categories, 'cartItems': cartItems, 'items': items}
+    context = {'products': products, 'cartItems': cartItems, 'items': items, 'categories': categories}
 
     return render(request, 'product/shop_list.html', context)
 
@@ -62,10 +58,9 @@ def category(request, id):
         order = {'cart_item': 0, 'cart_total': 0}
         cartItems = order['cart_item']
 
-    products = Product.objects.filter(category_id=id)
     categories = Category.objects.all()
-
-    context = {'products': products, 'categories': categories, 'cartItems': cartItems, 'items': items}
+    products = Product.objects.filter(category_id=id)
+    context = {'products': products, 'cartItems': cartItems, 'items': items, 'categories': categories}
 
     return render(request, 'product/category.html', context)
 
@@ -291,12 +286,6 @@ def update_cart(request):
         orderItem.delete()
 
     return JsonResponse('Item was added', safe=False)
-
-
-def order_status(request):
-    print('data: ', request.body)
-
-    return JsonResponse('payment completed', safe=False)
 
 
 def order_factor(request):
